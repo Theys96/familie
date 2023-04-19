@@ -12,7 +12,7 @@ require 'code.php';
 if (isset($_POST['password']) && $_POST['password'] == "Havinga123") {
 	$_SESSION['loggedin'] = "true";
 }
-$loggedIn = boolval($_SESSION['loggedin']);
+$loggedIn = isset($_SESSION['loggedin']) ? boolval($_SESSION['loggedin']) : false;
 ?>
 <!DOCTYPE html>
 <html>
@@ -134,7 +134,9 @@ echo "<br />";
 foreach ($person->marriage as $marriage) {
 	echo "Getrouwd met " . personLink($marriage['partner']);
 	echo dateAndPlace_($marriage['date'], $marriage['place']);
-	if ($marriage['source']) { echo sourceLink($marriage['source']); }
+	if (isset($marriage['source']) && $marriage['source']) { 
+		echo sourceLink($marriage['source']); 
+	}
 	echo "<br />";
 }
 
@@ -156,7 +158,7 @@ if (count($person->children) > 0) {
 			echo " met " . personLink($child['partner']);
 		}
 
-		if ($child['source']) {
+		if (isset($child['source']) && $child['source']) {
 			echo sourceLink($child['source']);
 		}
 		echo "<br />";
@@ -174,7 +176,7 @@ if (count($person->siblings) > 0) {
 		} else if ($sibling['sibling']->doopDate && $sibling['sibling']->doopDate != "??") {
 			echo " (gedoopt ". dateString($sibling['sibling']->doopDate) .")";
 		}
-		if ($sibling['source']) {
+		if (isset($sibling['source']) && $sibling['source']) {
 			echo sourceLink($sibling['source']);
 		}
 		if (!$sibling['full']) {echo "</i>";}

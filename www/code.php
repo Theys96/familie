@@ -48,7 +48,7 @@ function dateString($date) {
 	}
 }
 
-function dateDiff($date1, $date2) {
+function dateDiff($date1, $date2 = null) {
 	if (is_numeric($date1) and is_numeric($date2)) {
 		return "~" . (intval($date2)-intval($date1)) . " jaar";
 	}

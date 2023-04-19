@@ -2,13 +2,13 @@
 error_reporting(E_ALL);
 session_start();
 require 'config.php';
-$Db = new Mysqli($mysql_host, $mysql_username, $mysql_password, $mysql_host);
+$Db = new Mysqli($mysql_host, $mysql_username, $mysql_password, $mysql_database);
 $Init = true;
 require 'code.php';
-if ($_POST['password'] == "Havinga321") {
+if (isset($_POST['password']) && $_POST['password'] == "Havinga321") {
 	$_SESSION['editLoggedin'] = "true";
 }
-$loggedIn = boolval($_SESSION['editLoggedin']);
+$loggedIn = isset($_SESSION['editLoggedin']) ? boolval($_SESSION['editLoggedin']) : false;
 
 function personFullname($row) {
 	return 
